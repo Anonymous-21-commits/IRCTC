@@ -6,7 +6,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Train extends Model {
     static associate(models) {
-      // Each train can have many bookings
+      // A train can have many bookings
       Train.hasMany(models.Booking, { foreignKey: 'trainId', as: 'bookings' });
     }
   }
@@ -14,29 +14,39 @@ module.exports = (sequelize, DataTypes) => {
   Train.init({
     train_name: {
       type: DataTypes.STRING,
-      allowNull: false,  // Makes 'train_name' required
+      allowNull: false,
     },
     source: {
       type: DataTypes.STRING,
-      allowNull: false,  // Makes 'source' required
+      allowNull: false,
     },
     destination: {
       type: DataTypes.STRING,
-      allowNull: false,  // Makes 'destination' required
+      allowNull: false,
     },
     total_seats: {
       type: DataTypes.INTEGER,
-      allowNull: false,  // Makes 'total_seats' required
+      allowNull: false,
       validate: {
-        min: 1  // Ensures the total_seats is at least 1
+        min: 1
       }
     },
     available_seats: {
       type: DataTypes.INTEGER,
-      allowNull: false,  // Makes 'available_seats' required
+      allowNull: false,
       validate: {
-        min: 0  // Ensures available_seats can't be negative
+        min: 0
       }
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'active',
+    },
+    train_type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'express',
     }
   }, {
     sequelize,

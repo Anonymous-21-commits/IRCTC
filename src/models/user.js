@@ -6,7 +6,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // Each user can have many bookings
+      // A user can have many bookings
       User.hasMany(models.Booking, { foreignKey: 'userId', as: 'bookings' });
     }
   }
@@ -14,27 +14,33 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     username: {
       type: DataTypes.STRING,
-      allowNull: false,  // Makes 'username' required
-      unique: true       // Ensures that the username is unique
+      allowNull: false,
+      unique: true,
+      validate: {
+        len: [3, 50],
+      }
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,  // Makes 'email' required
-      unique: true,      // Ensures that the email is unique
+      allowNull: false,
+      unique: true,
       validate: {
-        isEmail: true     // Validates if the email is in the correct format
+        isEmail: true,
       }
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false   // Makes 'password' required
+      allowNull: false,
+      validate: {
+        len: [6, 100],
+      }
     },
     role: {
       type: DataTypes.STRING,
-      allowNull: false,  // Makes 'role' required
-      defaultValue: 'user', // Default role is 'user'
+      allowNull: false,
+      defaultValue: 'user',
       validate: {
-        isIn: [['user', 'admin']] // Ensures the role is either 'user' or 'admin'
+        isIn: [['user', 'admin']],
       }
     }
   }, {

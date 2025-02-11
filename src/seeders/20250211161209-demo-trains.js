@@ -5,10 +5,12 @@ module.exports = {
     await queryInterface.bulkInsert('Trains', [
       {
         train_name: 'Rajdhani Express',
-        source: 'Howrah',      // Popular source station
-        destination: 'Mumbai', // Popular destination station
+        source: 'Howrah',
+        destination: 'Mumbai',
         total_seats: 100,
         available_seats: 100,
+        status: 'active',
+        train_type: 'express',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -18,15 +20,19 @@ module.exports = {
         destination: 'Chandigarh',
         total_seats: 80,
         available_seats: 80,
+        status: 'active',
+        train_type: 'superfast',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         train_name: 'Duronto Express',
-        source: 'Kolkata',     // Source: Kolkata
+        source: 'Kolkata',
         destination: 'Bangalore',
         total_seats: 120,
         available_seats: 120,
+        status: 'active',
+        train_type: 'express',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -36,6 +42,8 @@ module.exports = {
         destination: 'Agra',
         total_seats: 50,
         available_seats: 50,
+        status: 'active',
+        train_type: 'luxury',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -45,6 +53,8 @@ module.exports = {
         destination: 'Pune',
         total_seats: 150,
         available_seats: 150,
+        status: 'active',
+        train_type: 'superfast',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -54,6 +64,8 @@ module.exports = {
         destination: 'Raipur',
         total_seats: 200,
         available_seats: 200,
+        status: 'active',
+        train_type: 'express',
         createdAt: new Date(),
         updatedAt: new Date()
       }
