@@ -1,19 +1,19 @@
 const trainRepo = require('../repository/trainRepo');
 
-// Service to get all trains between two stations
-const getTrainsBetweenStations = async (source, destination) => {
-  try {
-    const trains = await trainRepo.getTrainsBetweenStations(source, destination);
-    if (trains.length === 0) {
-      throw new Error('No trains found between the given stations.');
-    }
-    return trains;
-  } catch (error) {
-    throw new Error(`Error in train service: ${error.message}`);
-  }
-};
 
-// Service to create a new train
+const getTrainsBetweenStations = async (source, destination) => {
+    try {
+      const trains = await trainRepo.getTrainsBetweenStations(source, destination);
+      if (trains.length === 0) {
+        throw new Error('No trains found between the given stations.');
+      }
+      return trains;
+    } catch (error) {
+      console.error('Original error:', error); 
+      throw new Error(`Error in train service: ${error.message}`);
+    }
+  };
+  
 const createTrain = async (trainData) => {
   try {
     const newTrain = await trainRepo.createTrain(trainData);
@@ -63,7 +63,7 @@ const getTrainsWithAvailableSeats = async (source, destination) => {
     
       // Filter out trains with 0 available seats
       const trainsWithSeats = trains
-        .filter(train => train.available_seats > 0)  // Exclude trains with 0 available seats
+        .filter(train => train.available_seats > 0) 
         .map(train => ({
           train_id: train.id,
           train_name: train.train_name,

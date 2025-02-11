@@ -11,6 +11,7 @@ const getTrainsBetweenStations = async (source, destination) => {
     });
     return trains;
   } catch (error) {
+    console.log('here');
     throw new Error('Error fetching trains between stations');
   }
 };
