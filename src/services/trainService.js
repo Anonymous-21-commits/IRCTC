@@ -1,4 +1,4 @@
-const trainRepo = require('../repos/trainRepo');
+const trainRepo = require('../repository/trainRepo');
 
 // Service to get all trains between two stations
 const getTrainsBetweenStations = async (source, destination) => {
@@ -52,11 +52,39 @@ const deleteTrain = async (id) => {
     throw new Error(`Error in train service: ${error.message}`);
   }
 };
+const getTrainsWithAvailableSeats = async (source, destination) => {
+    try {
+      // Fetch all trains between source and destination
+      const trains = await trainRepo.getTrainsBetweenStations(source, destination);
+      
+      if (trains.length === 0) {
+        throw new Error('No trains found between the given stations.');
+      }
+    
+      // Filter out trains with 0 available seats
+      const trainsWithSeats = trains
+        .filter(train => train.available_seats > 0)  // Exclude trains with 0 available seats
+        .map(train => ({
+          train_id: train.id,
+          train_name: train.train_name,
+          source: train.source,
+          destination: train.destination,
+          available_seats: train.available_seats,
+        }));
+    
+      return trainsWithSeats;
+    } catch (error) {
+      throw new Error(`Error in getting trains with available seats: ${error.message}`);
+    }
+  };
+  
+  
 
 module.exports = {
   getTrainsBetweenStations,
   createTrain,
   getTrainById,
   updateTrain,
-  deleteTrain
+  deleteTrain,
+  getTrainsWithAvailableSeats
 };
