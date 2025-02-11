@@ -6,7 +6,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Train extends Model {
     static associate(models) {
-      // A train can have many bookings
+     
       Train.hasMany(models.Booking, { foreignKey: 'trainId', as: 'bookings' });
     }
   }

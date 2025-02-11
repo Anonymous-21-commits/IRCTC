@@ -23,7 +23,7 @@ const createTrain = async (trainData) => {
   }
 };
 
-// Service to get a train by ID
+
 const getTrainById = async (id) => {
   try {
     const train = await trainRepo.getTrainById(id);
@@ -33,7 +33,7 @@ const getTrainById = async (id) => {
   }
 };
 
-// Service to update a train by ID
+
 const updateTrain = async (id, updatedData) => {
   try {
     const updatedTrain = await trainRepo.updateTrain(id, updatedData);
@@ -43,7 +43,7 @@ const updateTrain = async (id, updatedData) => {
   }
 };
 
-// Service to delete a train by ID
+
 const deleteTrain = async (id) => {
   try {
     const response = await trainRepo.deleteTrain(id);
@@ -54,14 +54,14 @@ const deleteTrain = async (id) => {
 };
 const getTrainsWithAvailableSeats = async (source, destination) => {
     try {
-      // Fetch all trains between source and destination
+      
       const trains = await trainRepo.getTrainsBetweenStations(source, destination);
       
       if (trains.length === 0) {
         throw new Error('No trains found between the given stations.');
       }
     
-      // Filter out trains with 0 available seats
+      
       const trainsWithSeats = trains
         .filter(train => train.available_seats > 0) 
         .map(train => ({

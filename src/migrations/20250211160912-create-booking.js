@@ -11,33 +11,33 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,  // Ensure 'userId' is required
+        allowNull: false, 
         references: {
-          model: 'Users',  // Reference to 'Users' table
+          model: 'Users', 
           key: 'id',
         },
-        onDelete: 'CASCADE', // Delete bookings if the user is deleted
+        onDelete: 'CASCADE', 
       },
       trainId: {
         type: Sequelize.INTEGER,
-        allowNull: false,  // Ensure 'trainId' is required
+        allowNull: false, 
         references: {
-          model: 'Trains',  // Reference to 'Trains' table
+          model: 'Trains', 
           key: 'id',
         },
-        onDelete: 'CASCADE', // Delete bookings if the train is deleted
+        onDelete: 'CASCADE', 
       },
       seats_booked: {
         type: Sequelize.INTEGER,
-        allowNull: false,  // Ensure 'seats_booked' is required
+        allowNull: false, 
         validate: {
-          min: 1,  // Ensure at least 1 seat is booked
+          min: 1,  
         }
       },
       status: {
         type: Sequelize.STRING,
-        allowNull: false,  // Ensure 'status' is required
-        defaultValue: 'pending',  // Default value is 'pending'
+        allowNull: false,  
+        defaultValue: 'pending', 
       },
       createdAt: {
         allowNull: false,

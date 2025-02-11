@@ -11,39 +11,39 @@ module.exports = {
       },
       train_name: {
         type: Sequelize.STRING,
-        allowNull: false,  // Make train_name required
+        allowNull: false, 
       },
       source: {
         type: Sequelize.STRING,
-        allowNull: false,  // Make source required
+        allowNull: false,  
       },
       destination: {
         type: Sequelize.STRING,
-        allowNull: false,  // Make destination required
+        allowNull: false,  
       },
       total_seats: {
         type: Sequelize.INTEGER,
-        allowNull: false,  // Make total_seats required
+        allowNull: false,  
         validate: {
-          min: 1  // Ensure total_seats is at least 1
+          min: 1 
         }
       },
       available_seats: {
         type: Sequelize.INTEGER,
-        allowNull: false,  // Make available_seats required
+        allowNull: false,  
         validate: {
-          min: 0  // Ensure available_seats can't be negative
+          min: 0  
         }
       },
       status: {
         type: Sequelize.STRING,
-        allowNull: false,  // Make status required
-        defaultValue: 'active',  // Default value
+        allowNull: false, 
+        defaultValue: 'active',  
       },
       train_type: {
         type: Sequelize.STRING,
-        allowNull: false,  // Make train_type required
-        defaultValue: 'express',  // Default value
+        allowNull: false,  
+        defaultValue: 'express',  
       },
       createdAt: {
         allowNull: false,

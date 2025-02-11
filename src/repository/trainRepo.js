@@ -1,6 +1,6 @@
 const { Train } = require('../models');
 
-// Get all trains between two stations (source and destination)
+
 const getTrainsBetweenStations = async (source, destination) => {
   try {
     const trains = await Train.findAll({
@@ -16,7 +16,7 @@ const getTrainsBetweenStations = async (source, destination) => {
   }
 };
 
-// Create a new train
+
 const createTrain = async (trainData) => {
   try {
     const newTrain = await Train.create(trainData);
@@ -26,7 +26,7 @@ const createTrain = async (trainData) => {
   }
 };
 
-// Get a train by ID
+
 const getTrainById = async (id) => {
   try {
     const train = await Train.findByPk(id);
@@ -39,7 +39,7 @@ const getTrainById = async (id) => {
   }
 };
 
-// Update a train by ID
+
 const updateTrain = async (id, updatedData) => {
   try {
     const train = await Train.findByPk(id);
@@ -53,7 +53,7 @@ const updateTrain = async (id, updatedData) => {
   }
 };
 
-// Delete a train by ID
+
 const deleteTrain = async (id) => {
   try {
     const train = await Train.findByPk(id);

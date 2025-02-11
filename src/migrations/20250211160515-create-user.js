@@ -11,24 +11,24 @@ module.exports = {
       },
       username: {
         type: Sequelize.STRING,
-        allowNull: false,   // Make 'username' required
-        unique: true,       // Make 'username' unique
+        allowNull: false,   
+        unique: true,       
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,   // Make 'email' required
-        unique: true,       // Make 'email' unique
+        allowNull: false,   
+        unique: true,       
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,   // Make 'password' required
+        allowNull: false,   
       },
       role: {
         type: Sequelize.STRING,
-        allowNull: false,   // Make 'role' required
-        defaultValue: 'user', // Default value is 'user'
+        allowNull: false,   
+        defaultValue: 'user', 
         validate: {
-          isIn: [['user', 'admin']] // Ensure the role is either 'user' or 'admin'
+          isIn: [['user', 'admin']] 
         }
       },
       createdAt: {
