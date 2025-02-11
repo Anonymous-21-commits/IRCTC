@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Booking, { foreignKey: 'userId', as: 'bookings' });
     }
   }
-
+  const bcrypt = require('bcrypt');
+  const { SALT } = require('../config/serverConfig');
   User.init(
     {
       email: {
@@ -31,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'User',
     }
   );
+  User.beforeCreate((user) => {
+    const encryptedPassword = bcrypt.hashSync(user.password, SALT);
+    user.password = encryptedPassword;
+  });
 
   return User;
 };
+
