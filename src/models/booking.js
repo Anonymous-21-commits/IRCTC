@@ -1,7 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-const { Enums } = require('../utils/common');
-const { BOOKED, CANCELLED, INITIATED, PENDING } = Enums.BOOKING_STATUS;
+const { BOOKING_STATUS } = require('../utils/common');
 
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
@@ -22,24 +21,24 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Trains', 
+        model: 'Trains',
         key: 'id',
       },
-      onDelete: 'CASCADE', 
+      onDelete: 'CASCADE',
     },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Users', 
+        model: 'Users',
         key: 'id',
       },
-      onDelete: 'CASCADE',  
+      onDelete: 'CASCADE',
     },
     status: {
       type: DataTypes.ENUM,
-      values: [BOOKED, CANCELLED, INITIATED, PENDING],
-      defaultValue: INITIATED,
+      values: Object.values(BOOKING_STATUS),
+      defaultValue: BOOKING_STATUS.INITIATED,
       allowNull: false,
     },
     noofSeats: {
@@ -50,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     totalCost: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue:0
     }
   }, {
     sequelize,
