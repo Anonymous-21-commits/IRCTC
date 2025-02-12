@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
     adminId: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'IRCTC', // Default value, can be replaced when actual admin is added
+      defaultValue: 'IRCTC', 
     }
   }, {
     sequelize,

@@ -27,6 +27,26 @@ class BookingRepository {
             throw new Error('An error occurred while updating the booking.');
         }
     }
+    async getBookingByUserIdAndBookingId(userId, bookingId) {
+        try {
+            
+            const booking = await Booking.findOne({
+                where: {
+                    userId: userId,
+                    id: bookingId
+                }
+            });
+
+            if (!booking) {
+                throw new Error('Booking not found.');
+            }
+
+            return booking;
+        } catch (error) {
+            console.error('Error fetching booking:', error);
+            throw new Error('An error occurred while fetching the booking.');
+        }
+    }
 }
 
 module.exports = BookingRepository;

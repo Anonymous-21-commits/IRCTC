@@ -39,6 +39,15 @@ class BookingService {
             throw new Error('Something went wrong during booking');
         }
     }
+    async getBookingDetails(userId, bookingId) {
+        try {
+            const booking = await this.bookingRepo.getBookingByUserIdAndBookingId(userId, bookingId);
+            return booking;
+        } catch (error) {
+            console.error('Error in BookingService:', error);
+            throw new Error('An error occurred while fetching booking details.');
+        }
+    }
 }
 
 module.exports = BookingService;

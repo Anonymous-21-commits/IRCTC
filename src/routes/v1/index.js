@@ -9,19 +9,19 @@ router.get('/trains', trainController.getTrainsBetweenStations);
 router.get('/train/:id', trainController.getTrainById);
 router.post(
     '/train',
-    validateAdminApiKey, // Protect with the API key
+    AuthRequestValidators.validateAdminApiKey, 
     trainController.createTrain
 );
 
 router.put(
     '/train/:id',
-    validateAdminApiKey, // Protect with the API key
+    AuthRequestValidators.validateAdminApiKey, 
     trainController.updateTrain
 );
 
 router.delete(
     '/train/:id',
-    validateAdminApiKey, // Protect with the API key
+    AuthRequestValidators.validateAdminApiKey, 
     trainController.deleteTrain
 );
 router.get('/trains/available-seats', trainController.getTrainsWithAvailableSeats);
@@ -44,11 +44,11 @@ router.get(
     AuthRequestValidators.validateIsAdminRequest,
     UserController.isAdmin
 );
-// router.post('/bookings', 
-//     AuthRequestValidators.validateUserAuth, // Validate the user's authentication first
-//     bookingController.create // Proceed with booking creation if authenticated
-//   ); 
-router.post('/bookings', bookingController.create);
+router.post('/bookings',
+    AuthRequestValidators.validateUserAuth, 
+    bookingController.create 
+);
+router.get('/bookings/:userId/:bookingId', bookingController.getBookingDetails);
 
 
 module.exports = router;
