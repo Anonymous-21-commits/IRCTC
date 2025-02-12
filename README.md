@@ -150,6 +150,25 @@ async isAuthenticated(token) {
 
 ```
 
+## Handling Race Conditions in Booking
+ - To prevent race conditions and overbooking when multiple users try to book seats at the same time, we use transaction handling in the booking process:
+
+ ```javascript
+    async createBooking(data) {
+    const t = await sequelize.transaction(); // Start a transaction
+    try {
+        const train = await getTrainById(data.trainId, { transaction: t });
+        if (!train || train.available_seats < data.noofSeats) {
+            throw new Error('Insufficient seats');
+        }
+        // Proceed with booking...
+        await t.commit();
+    } catch (error) {
+        await t.rollback();
+        throw new Error('Booking failed');
+    }
+}
+ ```
 ## Admin Protection
 - Admin routes, such as creating, updating, and deleting trains, are protected using an API key. 
 - Only requests with a valid API key can access these routes.
