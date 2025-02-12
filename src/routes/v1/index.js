@@ -46,8 +46,10 @@ router.get(
 );
 router.post('/bookings',
     AuthRequestValidators.validateUserAuth, 
+    UserController.isAuthenticated, 
     bookingController.create 
 );
+
 router.get('/bookings/:userId/:bookingId', bookingController.getBookingDetails);
 
 
