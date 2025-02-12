@@ -5,7 +5,11 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       User.hasMany(models.Booking, { foreignKey: 'userId', as: 'bookings' });
+      this.belongsToMany(models.Role, {
+        through: 'User_Roles',
+      })
     }
+
   }
   const bcrypt = require('bcrypt');
   const { SALT } = require('../config/serverConfig');
