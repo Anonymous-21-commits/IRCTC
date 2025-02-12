@@ -20,7 +20,32 @@ const validateIsAdminRequest = (req, res, next) => {
     }
     next();
 }
+const ADMIN_API_KEY = process.env.ADMIN_API_KEY;
+
+const validateAdminApiKey = (req, res, next) => {
+  const apiKey = req.headers['x-api-key']; 
+
+  if (!apiKey) {
+    return res.status(403).json({
+      success: false,
+      message: 'API key is required',
+    });
+  }
+
+  if (apiKey !== ADMIN_API_KEY) {
+    return res.status(403).json({
+      success: false,
+      message: 'Invalid API key',
+    });
+  }
+
+  // If the API key is valid, proceed to the next middleware or controller
+  next();
+};
+
+
 module.exports={
     validateUserAuth,
-    validateIsAdminRequest
+    validateIsAdminRequest,
+    validateAdminApiKey
 }
