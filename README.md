@@ -129,6 +129,27 @@ createToken(user) {
 - Before accessing protected routes like booking (/bookings), this middleware checks if the user has a valid JWT token.
 - It uses the verifyToken() method to ensure the token is valid, and it retrieves the user’s ID from the token.
 
+```javascript
+
+async isAuthenticated(token) {
+    try {
+        const response = this.verifyToken(token);
+        if (!response) {
+            throw { error: 'Invalid token' };
+        }
+        const user = await this.userRepository.getById(response.id);
+        if (!user) {
+            throw { error: 'No user with the corresponding token exists' };
+        }
+        return user.id;
+    } catch (error) {
+        console.log("Something went wrong in the auth process");
+        throw error;
+    }
+}
+
+```
+
 ## Admin Protection
 - Admin routes, such as creating, updating, and deleting trains, are protected using an API key. 
 - Only requests with a valid API key can access these routes.
